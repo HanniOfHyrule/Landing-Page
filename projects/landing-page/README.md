@@ -1,13 +1,9 @@
 # Landing Page Project
 
-## Table of Contents
+## My first Landing Page
 
-* [Instructions](#instructions)
+Hello i'am Hanni and a self-taught software developer. I live in Germany and i'am a Mom of two. 
+One and a half year ago i fall in love with coding. An so here i am, building my fist landing page with udacity to get my nanodegree. 
+This website is build with courage and brainwax. 
 
-## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
