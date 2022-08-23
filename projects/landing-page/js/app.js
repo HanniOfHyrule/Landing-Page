@@ -1,62 +1,78 @@
 /**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
-
-/**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
-
-/**
  * Define Global Variables
- * 
-*/
+ *
+ */
 
+const navList = document.getElementById("navbar__list");
+const sections = document.querySelectorAll("section");
+const links = navList.getElementsByTagName("a");
+let currentSection = null;
 
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
+// create the nav &  links
 
+for (const section of sections) {
+  const li = document.createElement("li");
+  li.className = "menu__link";
+  const a = document.createElement("a");
+  a.textContent = section.dataset.nav;
+  a.href = `#${section.id}`;
 
+  // add to the li-tag and a-tag
 
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
+  li.appendChild(a);
+  navList.appendChild(li);
+}
 
-// build the nav
+// navigation highlited after click-event
 
+function viewSection(e) {
+  // for (let i = 0; i < links.length; i++) {
+  //   links[i].style.color = "";
+  // }
 
-// Add class 'active' to section when near top of viewport
+  if (currentSection) {
+    currentSection.style.color = null;
+  }
+  e.target.style.color = "yellow";
+  currentSection = e.target;
+}
+for (let i = 0; i < links.length; i++) {
+  links[i].addEventListener("click", viewSection);
+}
 
+// Add class 'active' to section when near top of viewport and et sections as active
 
-// Scroll to anchor ID using scrollTO event
+window.addEventListener("scroll", (e) => {
+  const sections = document.querySelectorAll("section");
+  sections.forEach((section) => {
+    const topDistance = section.getBoundingClientRect().top;
+    if (topDistance > -5 && topDistance < 100) {
+      section.classList.add("active-class");
+    } else {
+      section.classList.remove("active-class");
+    }
+  });
+});
 
+// Scroll smooth to section on link click
+
+const scrollToSections = document.querySelectorAll('a[href^="#"');
+
+for (let item of scrollToSections) {
+  item.addEventListener("click", (e) => {
+    let getHashValue = item.getAttribute("href");
+    let target = document.querySelector(getHashValue);
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    history.pushState(null, null, getHashValue);
+    e.preventDefault();
+  });
+}
 
 /**
  * End Main Functions
  * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
-
-
+ *
+ */
