@@ -39,12 +39,13 @@ for (let i = 0; i < links.length; i++) {
 //mobile Navbar toggle
 
 function mobileBurgerBar() {
-  const burgerToggle = document.getElementById("navbar__list");
-  if (burgerToggle.className === "navbar__list") {
-    burgerToggle += " responsive";
+  const burgerToggle = document.getElementById("navbar__menu");
+  if (burgerToggle === "navbar__menu") {
+    burgerToggle += "responsive";
   } else {
-    burgerToggle.className = "navbar__list";
+    burgerToggle === "navbar__menu";
   }
+  console.log(burgerToggle);
 }
 
 // Add class 'active' to section when near top of viewport and the sections as active
