@@ -13,3 +13,5 @@ Here is the project description [Udacity Reviews](https://review.udacity.com/#!/
 JavaScript
 HTML
 CSS
+
+##### Dependencies
