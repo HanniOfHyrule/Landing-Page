@@ -4,7 +4,7 @@
 
 This Landing page is built with vanilla JS and under specification from Udacity.
 
-![This is an image](./images/LandigPageScreenshot.png)
+![This is an image](/images/LandigPageScreenshot.png)
 
 ### Description
 
