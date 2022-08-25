@@ -17,19 +17,15 @@ for (const section of sections) {
   a.textContent = section.dataset.nav;
   a.href = `#${section.id}`;
 
-  // add to the li-tag and a-tag
+  // add to the li-tag to the a-tags
 
   li.appendChild(a);
   navList.appendChild(li);
 }
 
-// navigation highlited after click-event
+// navigation highlited after click-event and remove
 
 function viewSection(e) {
-  // for (let i = 0; i < links.length; i++) {
-  //   links[i].style.color = "";
-  // }
-
   if (currentSection) {
     currentSection.style.color = null;
   }
@@ -40,7 +36,7 @@ for (let i = 0; i < links.length; i++) {
   links[i].addEventListener("click", viewSection);
 }
 
-// Add class 'active' to section when near top of viewport and et sections as active
+// Add class 'active' to section when near top of viewport and the sections as active
 
 window.addEventListener("scroll", (e) => {
   const sections = document.querySelectorAll("section");
