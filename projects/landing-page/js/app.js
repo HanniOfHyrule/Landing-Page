@@ -36,6 +36,17 @@ for (let i = 0; i < links.length; i++) {
   links[i].addEventListener("click", viewSection);
 }
 
+//mobile Navbar toggle
+
+function mobileBurgerBar() {
+  const burgerToggle = document.getElementById("navbar__list");
+  if (burgerToggle.className === "navbar__list") {
+    burgerToggle += " responsive";
+  } else {
+    burgerToggle.className = "navbar__list";
+  }
+}
+
 // Add class 'active' to section when near top of viewport and the sections as active
 
 window.addEventListener("scroll", (e) => {
