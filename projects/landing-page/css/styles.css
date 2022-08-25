@@ -27,6 +27,7 @@ h1 {
   font-size: 3em;
   margin: 2em 1rem;
   font-weight: 100;
+  letter-spacing: 0.3rem;
 }
 
 @media only screen and (min-width: 35em) {
@@ -51,6 +52,13 @@ p {
 /* ---- Layout Rules ---- */
 main {
   margin: 10vh 1em 10vh;
+}
+header {
+  background-image: url("../images/darkandlight-unsplash.jpg");
+  background-size: cover;
+  padding: 5rem;
+  margin-top: -10rem;
+  max-height: 40rem;
 }
 
 .main-hero {
@@ -84,7 +92,8 @@ section {
 
 .navbar__menu .menu__link {
   padding: 1em;
-  font-weight: bold;
+  font-weight: lighter;
+  letter-spacing: 0.2rem;
 }
 .menu__link a {
   color: white;
@@ -102,7 +111,8 @@ section {
 a:link {
   color: #eee;
 }
-a,a:visited {
+a,
+a:visited {
   color: #eee;
 }
 a:hover {
@@ -123,13 +133,21 @@ a.link.active {
 
 /* Footer Styles */
 .page__footer {
-  background: #000;
+  background: linear-gradient(
+    15deg,
+    rgba(0, 13, 60, 1) 0%,
+    rgba(136, 203, 171, 1) 100%
+  );
   padding: 3em;
   color: #fff;
 }
 
-.page__footer p {
+.page__footer p a {
   color: #fff;
+  text-decoration: none;
+}
+.page__footer a:hover {
+  color: #cc1;
 }
 
 /* ---- Theme Rules ---- */
