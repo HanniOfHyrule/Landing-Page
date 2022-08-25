@@ -10,6 +10,10 @@
       href="https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <!-- Load Styles -->
     <link href="css/styles.css" rel="stylesheet" />
   </head>
@@ -17,10 +21,14 @@
     <!-- HTML Follows BEM naming conventions 
   IDs are only used for sections to connect menu achors to sections -->
     <nav class="page__header">
-      <nav class="navbar__menu">
+      <nav class="navbar__menu" id="'navbar__menu">
         <ul id="navbar__list"></ul>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i
+        ></a>
       </nav>
     </nav>
+
     <main>
       <header class="main__hero" id="section">
         <section data-nav="Home" id="section">
