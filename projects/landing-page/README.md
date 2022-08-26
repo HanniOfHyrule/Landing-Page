@@ -17,3 +17,7 @@ HTML
 CSS
 
 ##### Dependencies
+
+babel
+webpack
+express
