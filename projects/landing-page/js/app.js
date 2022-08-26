@@ -20,7 +20,7 @@ for (const section of sections) {
   // add to the li-tag to the a-tags
 
   li.appendChild(a);
-  navList.appendChild(li);
+  navList.append(li);
 }
 
 // navigation highlited after click-event and remove
@@ -40,10 +40,10 @@ for (let i = 0; i < links.length; i++) {
 
 function mobileBurgerBar() {
   const burgerToggle = document.getElementById("navbar__menu");
-  if (burgerToggle === "navbar__menu") {
-    burgerToggle += "responsive";
+  if (burgerToggle.className === "navbar__menu") {
+    burgerToggle.className += " responsive";
   } else {
-    burgerToggle === "navbar__menu";
+    burgerToggle.className = "navbar__menu";
   }
   console.log(burgerToggle);
 }

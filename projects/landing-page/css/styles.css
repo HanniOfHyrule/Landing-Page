@@ -82,6 +82,7 @@ section {
 /* Navigation Styles*/
 .navbar__menu {
   overflow: hidden;
+  background-color: #333;
 }
 .navbar__menu a {
   float: left;
@@ -113,6 +114,7 @@ section {
   font-weight: lighter;
   letter-spacing: 0.2rem;
 }
+
 .menu__link a {
   color: white;
   text-decoration: none;
@@ -127,43 +129,37 @@ section {
 
 /*---- Navigation responsive - Burger Bar ----*/
 
-a.icon {
+.navbar__menu a.icon {
   display: none;
 }
 
-.icon:hover {
+.navbar__menu .icon:hover {
   color: #cc1;
 }
 
 @media screen and (max-width: 600px) {
-  .navbar__list a:not(:first-child) {
+  #navbar__list {
     display: none;
   }
-  a.icon {
+
+  .navbar__menu a.icon {
     float: right;
     display: block;
   }
-  .icon a:hover {
-    color: #cc1;
-  }
 }
 @media screen and (max-width: 600px) {
-  .navbar__list .menu__link .responsive {
+  .navbar__menu .responsive {
     position: relative;
-    flex-direction: row;
+  }s
+  .navbar__menu .responive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
-  .navbar__list .menu__link .responive a.icon {
+  .navbar__menu .responsive a {
     float: none;
     display: block;
-    text-align: left;
-  }
-  .navbar__menu .menu__link {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .navbar__menu a {
-    text-align: center;
+    flex-direction: row;
   }
 }
 
