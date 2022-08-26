@@ -10,6 +10,8 @@ let currentSection = null;
 
 // create the nav &  links
 
+// ** Main Functions **
+
 for (const section of sections) {
   const li = document.createElement("li");
   li.className = "menu__link";
@@ -22,6 +24,11 @@ for (const section of sections) {
   li.appendChild(a);
   navList.append(li);
 }
+
+// ** End Main Functions **
+//_________________________________________//
+
+// ** Events **
 
 // navigation highlited after click-event and remove
 
@@ -36,12 +43,11 @@ for (let i = 0; i < links.length; i++) {
   links[i].addEventListener("click", viewSection);
 }
 
-//mobile Navbar toggle
+//mobile navigation Burger bar
 
 function mobileBurgerBar() {
   const burgerToggle = document.getElementById("navbar__list");
   burgerToggle.classList.toggle("active__BurgerBar");
-  console.log(burgerToggle);
 }
 
 // Add class 'active' to section when near top of viewport and the sections as active
@@ -75,8 +81,4 @@ for (let item of scrollToSections) {
   });
 }
 
-/**
- * End Main Functions
- * Begin Events
- *
- */
+// ** End Events **
