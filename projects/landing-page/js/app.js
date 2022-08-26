@@ -39,12 +39,8 @@ for (let i = 0; i < links.length; i++) {
 //mobile Navbar toggle
 
 function mobileBurgerBar() {
-  const burgerToggle = document.getElementById("navbar__menu");
-  if (burgerToggle.className === "navbar__menu") {
-    burgerToggle.className += " responsive";
-  } else {
-    burgerToggle.className = "navbar__menu";
-  }
+  const burgerToggle = document.getElementById("navbar__list");
+  burgerToggle.classList.toggle("active__BurgerBar");
   console.log(burgerToggle);
 }
 

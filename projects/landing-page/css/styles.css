@@ -82,7 +82,11 @@ section {
 /* Navigation Styles*/
 .navbar__menu {
   overflow: hidden;
-  background-color: #333;
+  background: linear-gradient(
+    15deg,
+    rgba(0, 13, 60, 1) 0%,
+    rgba(136, 203, 171, 1) 100%
+  );
 }
 .navbar__menu a {
   float: left;
@@ -97,6 +101,7 @@ section {
 .navbar__menu ul {
   padding-left: 1rem;
   margin: 0;
+  list-style-type: none;
   text-align: left;
   background: linear-gradient(
     15deg,
@@ -129,7 +134,7 @@ section {
 
 /*---- Navigation responsive - Burger Bar ----*/
 
-.navbar__menu a.icon {
+.navbar__menu .icon {
   display: none;
 }
 
@@ -138,28 +143,39 @@ section {
 }
 
 @media screen and (max-width: 600px) {
-  #navbar__list {
+  .navbar__list {
     display: none;
+  }
+  .navbar__menu .icon {
+    z-index: 6;
+    position: relative;
   }
 
   .navbar__menu a.icon {
     float: right;
     display: block;
+    z-index: 6;
+  }
+  .navbar__menu li {
+    display: inline-block;
   }
 }
 @media screen and (max-width: 600px) {
-  .navbar__menu .responsive {
+  .navbar__menu .active__BurgerBar {
     position: relative;
-  }s
-  .navbar__menu .responive .icon {
+    display: block;
+  }
+  .navbar__list .active__BurgerBar ul {
+    float: left;
+    padding: 0.5rem;
+  }
+  .navbar__menu .active__BurgerBar .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
-  .navbar__menu .responsive a {
-    float: none;
-    display: block;
-    flex-direction: row;
+  .navbar__menu .active__BurgerBar a {
+    text-align: left;
   }
 }
 
