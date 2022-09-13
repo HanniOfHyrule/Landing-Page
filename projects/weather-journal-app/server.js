@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 // Cors for cross origin allowance
 const cors = require("cors");
-const { response } = require("express");
+// const { response } = require("express");
 app.use(cors());
 
 // Initialize the main project folder
@@ -30,11 +30,52 @@ function listening() {
   console.log(`running on localhost: ${port}`);
 }
 
-const data = [];
-
-//GET route
-app.get("/", (req, res) => {
-  res.send(data);
+//API Key request
+app.get("/config", (req, res) => {
+  res.send(
+    Object.fromEntries(
+      Object.entries(process.env).filter(([key]) =>
+        key.startsWith("WEATHERAPP_")
+      )
+    )
+  );
 });
 
-//callBack
+//GET route
+app.get("/all", sendData);
+function sendData(req, res) {
+  res.send(projectData);
+  console.log(projectData);
+}
+
+const addData = async (res, req) => {
+  let newInput = {
+    zip: req.body.zip,
+    thoughts: req.body.thoughts,
+  };
+  console.log(newInput);
+
+  const currentWeather = await getWeather(newInput.zip);
+  let entry = {
+    date: getDate(),
+    temp: weather.main.temp,
+    thoughts: newInput.thoughts,
+  };
+  projectData.unshift(entry);
+  res.send(projectData[0]);
+  console.log(projectData);
+};
+
+app.post("/add", addData);
+
+const getWeather = async (zip) => {
+  const baseURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?zip=${newZip}&appid=${process.env.WEATHERAPP_API_KEY}`;
+  const request = await fetch(baseURL + zip);
+  try {
+    const weatherData = await request.json();
+    console.log(weatherData);
+    return weatherData;
+  } catch (error) {
+    console.log("get error", error);
+  }
+};
