@@ -1,36 +1,75 @@
 :root {
   --primary: #fff;
-  --primary-dark: black;
-  --primary-blue: rgb(86, 98, 206);
-  --primary-blue-light: rgb(48, 48, 106);
+  --primary-dark: #182226;
+  --primary-blue: #586973;
+  --primary-light: #d9c6bf;
+  --primary-dark-grey: #455059;
+  --primary-grey: #9fa1a6;
 }
 
 body {
-  background: #fffff8;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-#app {
+  background-image: url("images/bob-van-aubel-HELZiLkDctI-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
   display: grid;
-  grid-auto-rows: minmax(150px, auto);
+  grid-auto-columns: minmax(150px, auto);
   /* grid-template-columns:  */
   height: 100vh;
-  background: var(--primary-blue-light);
-  color: #f0d43a;
+  color: var(--primary-dark);
   justify-content: center;
   grid-gap: 1em;
-  font-size: 20px;
-  font-family: "Oswald", sans-serif;
 }
 
+#app_header {
+}
+
+/* Text styles*/
+h1 {
+  font-family: sans-serif;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url("fonts/Montserrat/static/Montserrat-Medium.ttf");
+}
+
+h2,
+h3,
+h4 {
+  letter-spacing: 0.1rem;
+  font-size: 1rem;
+  font-family: Montserrat;
+}
+/* Input styles */
+
 .holder {
+  display: grid;
+  justify-content: space-between;
 }
 
 .entry {
   background: rgba(59, 74, 107, 0.4);
 }
 
-#entryHolder {
+.entryHolder {
+  display: grid;
+  grid-template-areas: row;
+  border-radius: 4px;
+  background-color: white;
+  padding: 10px;
+  margin: 20px;
+  width: 40rem;
+  box-shadow: black 5px 5px 12px;
+  font-family: "Pacifico", cursive;
+  word-spacing: 1px;
+  font-size: 18px;
+  color: #4a4a4a;
+}
+#allRecentPosts {
+  margin-top: 10px;
+  padding-top: 10px;
+  background-color: transparent;
+  min-height: 30vh;
+  box-shadow: 0px -1px 19px white;
 }
 
 #date {
@@ -57,32 +96,36 @@ input {
   display: block;
   height: 60px;
   width: 320px;
-  background: #22b2da;
-  color: #f0d43a;
+  background: var(--primary-light);
+  color: var(--primary-dark);
   font-size: 20px;
-  font-family: "Oswald", sans-serif;
   border: none;
 }
 
 button {
   width: 400px;
   height: 100px;
-  background: #3b4a6b;
-  color: #f0d43a;
+  background: var(--primary-dark);
+  color: var(--primary-grey);
   font-size: 26px;
   font-family: "Oswald", sans-serif;
+  cursor: pointer;
   border: none;
   box-shadow: 2px 4px 5px #444;
 }
-h1 {
-  font-size: 36px;
-}
 
-textarea {
-  background: #22b2da;
-  color: #f0d43a;
-  font-size: 20px;
-  font-family: "Oswald", sans-serif;
+.myInput {
+  display: block;
+  height: 60px;
+  width: 320px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 1rem;
+  border: none;
+  margin-bottom: 1rem;
+  padding: 1px 2px;
+  text-align: start;
+  writing-mode: horizontal-tb !important;
 }
 /* Reset style for HTML element on active to have no border*/
 input:focus,
@@ -94,18 +137,22 @@ button:focus {
 /* Style for Placeholder Text*/
 ::placeholder {
   /* Firefox, Chrome, Opera */
-  color: #f0d43a;
-  font-family: "Oswald", sans-serif;
+  color: var(--primary-dark);
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: #f0d43a;
-  font-family: "Oswald", sans-serif;
+  color: var(--primary-dark);
+  font-family: Montserrat;
 }
 
 ::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: #f0d43a;
-  font-family: "Oswald", sans-serif;
+  color: var(--primary-dark);
+  font-family: Montserrat;
+}
+
+.invalid {
+  border: solid red !important;
+  background-color: pink !important;
 }
