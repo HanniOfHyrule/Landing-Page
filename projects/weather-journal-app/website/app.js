@@ -50,7 +50,7 @@ function updateUI(object) {
   newDiv.innerHTML = newDiv.innerHTML = `
       <div class="date"><u>Date:</u> ${object.date}</div>
       <div class="temp"><u>Temperature:</u> ${object.temp}°C</div>
-      <div class="content">${object.thoughts}</div>
+      <div class="content">My feeling: ${object.thoughts}</div>
   `;
   document.getElementById("allRecentPosts").appendChild(newDiv);
 }
