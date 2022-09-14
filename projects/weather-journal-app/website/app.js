@@ -1,83 +1,66 @@
-/* Function to GET Web API Data*/
-const getData = async (baseURL) => {
-  const res = await fetch(baseURL);
-  try {
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.log("error", error);
+//Global variables
+const zip = document.getElementById("zip");
+const feelings = document.getElementById("feelings");
+
+/* Function called by event listener */
+function clickHandler() {
+  if (zip.value.length != 5) {
+    zip.classList.add("invalid");
+    console.log("Invalid zip code");
+  } else if (feelings.value.length < 2) {
+    feelings.classList.add("invalid");
+    console.log("answer to short");
+  } else {
+    postAndFetch();
   }
-};
+}
 
 /* Function to GET Project Data */
-const retrieveData = async () => {
-  const request = await fetch("/all");
-  try {
-    // Transform into JSON
-    const allData = await request.json();
-    // Write updated data to DOM elements
-  } catch (error) {
-    console.log("here is something wrong", error);
-  }
-};
+function postAndFetch() {
+  postData("/add", { zip: zip.value, thoughts: feelings.value }).then(
+    (object) => {
+      updateUI(object);
+    },
+    clearInput()
+  );
+}
 
 /* Function to POST data */
 const postData = async (baseURL, data) => {
+  const request = await fetch(baseURL, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
   try {
-    const request = await fetch(baseURL, {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
     const response = await request.json();
     console.log(response);
     return response;
   } catch (error) {
-    console.log("error", error);
+    console.log("post error", error);
   }
 };
-
-// Personal AP Key for OpenWeatherMap API
-let process = {
-  env: getData("/config"),
-};
-
-// Event listener to add function to existing HTML DOM element
-document.getElementById("generate").addEventListener("click", performAction);
 
 // Create a new date instance dynamically with JS
 
 function updateUI(object) {
   const newDiv = document.createElement("div");
   newDiv.classList.add("entryHolder");
-  newDiv.innerHTML = `<div class="date"><u>Date: </u>${object.date}</div>
-  <div class="temp"><u>Temperature: </ul>${object.temp}</div>
-  <div class='content'><u>Your Feelings: </u>${object.content}</div>
+  newDiv.innerHTML = newDiv.innerHTML = `
+      <div class="date"><u>Date:</u> ${object.date}</div>
+      <div class="temp"><u>Temperature:</u> ${object.temp}°C</div>
+      <div class="content">${object.thoughts}</div>
   `;
   document.getElementById("allRecentPosts").appendChild(newDiv);
 }
 
-/* Function called by event listener */
-function performAction(e) {
-  const newZip = document.getElementById("zip").value;
-  const newContent = document.getElementById("feelings").value;
-  const baseURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?zip=${newZip}&appid=${process.env.WEATHERAPP_API_KEY}`;
-
-  getData(baseURL).then(function (data) {
-    postData("/add", {
-      zip: zip.value,
-      thoughts: feelings.value,
-    }).then((object) => {
-      updateUI(object);
-    });
-  });
+function clearInput() {
+  zip.value = "";
+  feelings.value = "";
+  zip.classList.remove("invalid");
+  feelings.classList.remove("invalid");
 }
 
-/* Function to GET Project Data */
-function getDate() {
-  let d = new Date();
-  let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
-  return newDate
-}
+// Event listener to add function to existing HTML DOM element
+document.getElementById("generate").addEventListener("click", clickHandler);
