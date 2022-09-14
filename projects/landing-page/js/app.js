@@ -1,62 +1,84 @@
 /**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
-
-/**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
-
-/**
  * Define Global Variables
- * 
-*/
+ *
+ */
 
+const navList = document.getElementById("navbar__list");
+const sections = document.querySelectorAll("section");
+const links = navList.getElementsByTagName("a");
+let currentSection = null;
 
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
+// create the nav &  links
 
+// ** Main Functions **
 
+for (const section of sections) {
+  const li = document.createElement("li");
+  li.className = "menu__link";
+  const a = document.createElement("a");
+  a.textContent = section.dataset.nav;
+  a.href = `#${section.id}`;
 
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
+  // add to the li-tag to the a-tags
 
-// build the nav
+  li.appendChild(a);
+  navList.append(li);
+}
 
+// ** End Main Functions **
+//_________________________________________//
 
-// Add class 'active' to section when near top of viewport
+// ** Events **
 
+// navigation highlited after click-event and remove
 
-// Scroll to anchor ID using scrollTO event
+function viewSection(e) {
+  if (currentSection) {
+    currentSection.style.color = null;
+  }
+  e.target.style.color = "yellow";
+  currentSection = e.target;
+}
+for (let i = 0; i < links.length; i++) {
+  links[i].addEventListener("click", viewSection);
+}
 
+//mobile navigation Burger bar
 
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
+function mobileBurgerBar() {
+  const burgerToggle = document.getElementById("navbar__list");
+  burgerToggle.classList.toggle("active__BurgerBar");
+}
 
-// Build menu 
+// Add class 'active' to section when near top of viewport and the sections as active
 
-// Scroll to section on link click
+window.addEventListener("scroll", (e) => {
+  const sections = document.querySelectorAll("section");
+  sections.forEach((section) => {
+    const topDistance = section.getBoundingClientRect().top;
+    if (topDistance > -5 && topDistance < 100) {
+      section.classList.add("active-class");
+    } else {
+      section.classList.remove("active-class");
+    }
+  });
+});
 
-// Set sections as active
+// Scroll smooth to section on link click
 
+const scrollToSections = document.querySelectorAll('a[href^="#"');
 
+for (let item of scrollToSections) {
+  item.addEventListener("click", (e) => {
+    let getHashValue = item.getAttribute("href");
+    let target = document.querySelector(getHashValue);
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    history.pushState(null, null, getHashValue);
+    e.preventDefault();
+  });
+}
+
+// ** End Events **

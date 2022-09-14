@@ -1,13 +1,23 @@
 # Landing Page Project
 
-## Table of Contents
+## Project
 
-* [Instructions](#instructions)
+This Landing page is built with vanilla JS and under specification from Udacity.
 
-## Instructions
+![This is an image](https://github.com/HanniOfHyrule/Landing-Page/blob/main/projects/landing-page/images/LandigPageScreenshot.png)
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+### Description
 
-To get started, open `js/app.js` and start building out the app's functionality
+Here is the project description [Udacity Reviews](https://review.udacity.com/#!/rubrics/3601/view)
 
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
+#### Resources
+
+JavaScript
+HTML
+CSS
+
+##### Dependencies
+
+babel
+webpack
+express
