@@ -1,18 +1,66 @@
-/* Global Variables */
-// Personal API Key for OpenWeatherMap API
-const baseURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=44.34&lon=10.99&appid={apiKey}`;
-const apiKey = "d9346f9e4b0d28968b5e673993cc1df8";
-
-// Event listener to add function to existing HTML DOM element
+//Global variables
+const zip = document.getElementById("zip");
+const feelings = document.getElementById("feelings");
 
 /* Function called by event listener */
-
-/* Function to GET Web API Data*/
-
-/* Function to POST data */
+function clickHandler() {
+  if (zip.value.length != 5) {
+    zip.classList.add("invalid");
+    console.log("Invalid zip code");
+  } else if (feelings.value.length < 2) {
+    feelings.classList.add("invalid");
+    console.log("answer to short");
+  } else {
+    postAndFetch();
+  }
+}
 
 /* Function to GET Project Data */
+function postAndFetch() {
+  postData("/add", { zip: zip.value, thoughts: feelings.value }).then(
+    (object) => {
+      updateUI(object);
+    },
+    clearInput()
+  );
+}
+
+/* Function to POST data */
+const postData = async (baseURL, data) => {
+  const request = await fetch(baseURL, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  try {
+    const response = await request.json();
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log("post error", error);
+  }
+};
 
 // Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
+
+function updateUI(object) {
+  const newDiv = document.createElement("div");
+  newDiv.classList.add("entryHolder");
+  newDiv.innerHTML = newDiv.innerHTML = `
+      <div class="date"><u>Date:</u> ${object.date}</div>
+      <div class="temp"><u>Temperature:</u> ${object.temp}°C</div>
+      <div class="content">${object.thoughts}</div>
+  `;
+  document.getElementById("allRecentPosts").appendChild(newDiv);
+}
+
+function clearInput() {
+  zip.value = "";
+  feelings.value = "";
+  zip.classList.remove("invalid");
+  feelings.classList.remove("invalid");
+}
+
+// Event listener to add function to existing HTML DOM element
+document.getElementById("generate").addEventListener("click", clickHandler);
