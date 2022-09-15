@@ -13,14 +13,9 @@ body {
   background-size: 100%;
   display: grid;
   grid-auto-columns: minmax(150px, auto);
-  /* grid-template-columns:  */
-  height: 100vh;
   color: var(--primary-dark);
   justify-content: center;
   grid-gap: 1em;
-}
-
-#app_header {
 }
 
 /* Text styles*/
@@ -39,6 +34,11 @@ h4 {
   font-size: 1rem;
   font-family: Montserrat;
 }
+
+h4 {
+  margin: 1.5rem;
+  color: var(--primary-light);
+}
 /* Input styles */
 
 .holder {
@@ -54,47 +54,26 @@ h4 {
   display: grid;
   grid-template-areas: row;
   border-radius: 4px;
-  background-color: white;
   padding: 10px;
   margin: 20px;
-  width: 40rem;
-  box-shadow: black 5px 5px 12px;
-  font-family: "Pacifico", cursive;
-  word-spacing: 1px;
-  font-size: 18px;
-  color: #4a4a4a;
+  width: 10rem;
+  word-spacing: 0.1rem;
+  font-size: 1.1rem;
+  background-color: var(--primary-light);
 }
 #allRecentPosts {
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-top: 1rem;
+  padding-top: 1rem;
   background-color: transparent;
   min-height: 30vh;
-  box-shadow: 0px -1px 19px white;
-}
-
-#date {
-}
-
-#temp {
-}
-
-#content {
-}
-
-.headline {
-}
-.title {
+  box-shadow: 0px -1px 19px var(--primary-grey);
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
-label {
-  display: block;
-  font-size: 27px;
-}
 
 input {
   display: block;
-  height: 60px;
+  height: 3rem;
   width: 320px;
   background: var(--primary-light);
   color: var(--primary-dark);
@@ -103,14 +82,14 @@ input {
 }
 
 button {
-  width: 400px;
-  height: 100px;
+  width: 10rem;
+  height: 4rem;
   background: var(--primary-dark);
   color: var(--primary-grey);
-  font-size: 26px;
-  font-family: "Oswald", sans-serif;
+  font-size: 1.1rem;
   cursor: pointer;
   border: none;
+  border-radius: 5rem;
   box-shadow: 2px 4px 5px #444;
 }
 
@@ -137,18 +116,18 @@ button:focus {
 /* Style for Placeholder Text*/
 ::placeholder {
   /* Firefox, Chrome, Opera */
-  color: var(--primary-dark);
+  color: var(--primary-grey);
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: var(--primary-dark);
+  color: var(--primary-grey);
   font-family: Montserrat;
 }
 
 ::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: var(--primary-dark);
+  color: var(--primary-grey);
   font-family: Montserrat;
 }
 
