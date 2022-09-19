@@ -19,12 +19,17 @@
       <form id="form" onsubmit="return false">
         <div class="holder zip">
           <h2 for="zip">Enter Zipcode here</h2>
-          <input type="text" id="zip" pattern="[0-9]{5}" placeholder="enter zip code here"/>
+          <input
+            type="text"
+            id="zip"
+            pattern="[0-9]{5}"
+            placeholder="enter zip code here"
+          />
         </div>
         <div class="holder feel">
           <h3 for="feelings">How are you feeling today?</h3>
           <textarea class="myInput" id="feelings"></textarea>
-          <button id="generate" type="submit">Generate</button>
+          <button id="generate" type="button">Generate</button>
         </div>
       </form>
       <section id="allRecentPosts">
