@@ -43,7 +43,7 @@ const addData = async (req, res) => {
   const currentWeather = await getWeather(newInput.zip);
   let entry = {
     date: getDate(),
-    temp: Math.round(currentWeather.main.temp),
+    temp: currentWeather.main.temp,
     thoughts: newInput.thoughts,
   };
   projectData.unshift(entry);
