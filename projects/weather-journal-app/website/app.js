@@ -18,8 +18,8 @@ function clickHandler() {
 /* Function to GET Project Data */
 function postAndFetch() {
   postData("/add", { zip: zip.value, thoughts: feelings.value }).then(
-    (object) => {
-      updateUI(object);
+    (data) => {
+      updateUI(data);
     },
     clearInput()
   );
@@ -44,15 +44,22 @@ const postData = async (baseURL, data) => {
 
 // Create a new date instance dynamically with JS
 
-function updateUI(object) {
-  const newDiv = document.createElement("div");
-  newDiv.classList.add("entryHolder");
-  newDiv.innerHTML = newDiv.innerHTML = `
-      <div class="date"><u>Date:</u> ${object.date}</div>
-      <div class="temp"><u>Temperature:</u> ${object.temp}°C</div>
-      <div class="content">My feeling: ${object.thoughts}</div>
-  `;
-  document.getElementById("allRecentPosts").appendChild(newDiv);
+function updateUI(data) {
+  console.log(data);
+  const allRecentPosts = document.getElementById("allRecentPosts");
+  allRecentPosts.innerHTML = "";
+
+  data.forEach(function (element) {
+    const newDiv = document.createElement("div");
+    newDiv.classList.add("entryHolder");
+
+    newDiv.innerHTML = `
+      <div class="date"><u>Date:</u> ${element.date}</div>
+      <div class="temp"><u>Temperature:</u> ${element.temp}°C</div>
+      <div class="content">My feeling: ${element.thoughts}</div>`;
+
+    allRecentPosts.appendChild(newDiv);
+  });
 }
 
 function clearInput() {
