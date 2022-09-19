@@ -34,19 +34,16 @@ function listening() {
 projectData = [];
 
 const addData = async (req, res) => {
-  let newInput = {
-    zip: req.body.zip,
-    thoughts: req.body.thoughts,
-  };
+  const currentWeather = await getWeather(req.body.zip);
 
-  const currentWeather = await getWeather(newInput.zip);
   let entry = {
     date: getDate(),
     temp: currentWeather.main.temp,
-    thoughts: newInput.thoughts,
+    thoughts: req.body.thoughts,
   };
+
   projectData.unshift(entry);
-  res.send(projectData[0]);
+  res.send(projectData);
 };
 
 app.post("/add", addData);
