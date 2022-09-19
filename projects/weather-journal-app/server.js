@@ -1,6 +1,8 @@
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
+const apiKey = "94a9e072a7dec0a791eab7f9876c4621";
+
 // Require Express to run server and routes
 const express = require("express");
 
@@ -27,9 +29,6 @@ const server = app.listen(port, listening);
 function listening() {
   console.log(`running on localhost: ${port}`);
 }
-
-const dotenv = require("dotenv");
-dotenv.config();
 
 // Setup empty JS object to hold the data
 projectData = [];
@@ -60,10 +59,11 @@ function getDate() {
 }
 
 const getWeather = async (zip) => {
-  const baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},de&appid=${process.env.WEATHERAPP_API_KEY}&units=metric`;
+  const baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},de&appid=${apiKey}&units=metric`;
   const request = await fetch(baseURL);
   try {
     const weatherData = await request.json();
+    console.log(weatherData);
     return weatherData;
   } catch (error) {
     console.log("error about get the weather", error);
