@@ -1,6 +1,3 @@
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
-
 // Require Express to run server and routes
 const express = require("express");
 
