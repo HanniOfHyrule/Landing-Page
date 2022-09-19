@@ -1,3 +1,6 @@
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+
 // Require Express to run server and routes
 const express = require("express");
 
@@ -17,7 +20,7 @@ app.use(cors());
 app.use(express.static("website"));
 
 // Setup Server
-const port = 8080;
+const port = 3000;
 
 //Confirm the server run
 const server = app.listen(port, listening);
