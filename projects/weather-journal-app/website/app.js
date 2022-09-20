@@ -1,55 +1,86 @@
 //Global variables
 const zip = document.getElementById("zip");
 const feelings = document.getElementById("feelings");
+const apiKey = "94a9e072a7dec0a791eab7f9876c4621&units=metric";
+const baseURL = "https://api.openweathermap.org/data/2.5/weather?";
 
 /* Function called by event listener */
 function clickHandler() {
   if (zip.value.length != 5) {
     zip.classList.add("invalid");
-    console.log("Invalid zip code");
   } else if (feelings.value.length < 2) {
     feelings.classList.add("invalid");
-    console.log("answer to short");
   } else {
     postAndFetch();
   }
 }
 
-/* Function to GET Project Data */
-function postAndFetch() {
-  postData("/add", { zip: zip.value, thoughts: feelings.value }).then(
-    (data) => {
-      updateUI(data);
-    },
-    clearInput()
-  );
+function getDate() {
+  const d = new Date();
+  const newDate =
+    d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  return newDate;
 }
 
-/* Function to POST data */
-const postData = async (baseURL, data) => {
-  const request = await fetch(baseURL, {
+const getTemperature = async (baseURL, zip, apiKey) => {
+  const res = await fetch(baseURL + "&zip=" + zip + ",de&appid=" + apiKey);
+
+  try {
+    const weather = await res.json();
+    console.log(weather);
+    return Math.round(weather.main.temp);
+  } catch (error) {
+    console.error("error about get the weather", error);
+  }
+};
+
+/* Function to POST entry */
+const postEntry = async (url = "", entries = {}) => {
+  const request = await fetch(url, {
     method: "POST",
     credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(entries),
   });
   try {
     const response = await request.json();
     console.log(response);
     return response;
   } catch (error) {
-    console.log("post error", error);
+    console.error("post error", error);
   }
 };
 
+const getEntries = async () => {
+  try {
+    const response = await fetch("/all");
+    const body = await response.json();
+    return body;
+  } catch (error) {
+    console.error("get error", error);
+  }
+};
+
+function postAndFetch() {
+  getTemperature(baseURL, zip.value, apiKey).then((temp) => {
+    postEntry("/add", {
+      zip: zip.value,
+      date: getDate(),
+      thoughts: feelings.value,
+      temp: temp,
+    }).then((entries) => {
+      updateUI(entries);
+    }, clearInput());
+  });
+}
+
 // Create a new date instance dynamically with JS
 
-function updateUI(data) {
-  console.log(data);
+function updateUI(entries) {
   const allRecentPosts = document.getElementById("allRecentPosts");
   allRecentPosts.innerHTML = "";
 
-  data.forEach(function (element) {
+  entries.forEach(function (element) {
     const newDiv = document.createElement("div");
     newDiv.classList.add("entryHolder");
 
@@ -71,3 +102,7 @@ function clearInput() {
 
 // Event listener to add function to existing HTML DOM element
 document.getElementById("generate").addEventListener("click", clickHandler);
+
+getEntries().then((entries) => {
+  updateUI(entries);
+});
