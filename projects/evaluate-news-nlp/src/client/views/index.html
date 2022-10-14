@@ -24,33 +24,34 @@
 
     <main>
       <section>
-        <form class="" onsubmit="return handleSubmit(event)">
-          <input
-            id="name"
-            type="text"
-            name="input"
-            value=""
-            onblur="onBlur()"
-            placeholder="Name"
-          />
+        <form class="" onsubmit="return Client.handleSubmit(event)">
+          <input id="name" type="text" name="input" value="" />
           <input
             type="submit"
             name=""
             value="submit"
-            onclick="return handleSubmit(event)"
-            onsubmit="return handleSubmit(event)"
+            onclick="return Client.handleSubmit(event)"
+            onsubmit="return Client.handleSubmit(event)"
           />
         </form>
       </section>
-
       <section>
         <strong>Form Results:</strong>
         <div id="results"></div>
+        <div id="sentiment"></div>
       </section>
     </main>
-
     <footer>
       <p>This is a footer</p>
     </footer>
+    <script>
+      // // Check that service workers are supported
+      // if ("serviceWorker" in navigator) {
+      //   // Use the window load event to keep the page load performant
+      //   window.addEventListener("load", () => {
+      //     navigator.serviceWorker.register("/service-worker.js");
+      //   });
+      // }
+    </script>
   </body>
 </html>
