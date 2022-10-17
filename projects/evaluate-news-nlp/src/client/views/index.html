@@ -23,9 +23,26 @@
     </header>
 
     <main>
+      <div class="main-header">
+        <h1>Text rating made easy!</h1>
+        <p>
+          We offer the possibility to evaluate a text according to polarity and
+          subjectivity using natural language processing. Simply copy the URL
+          into the input field and then you know what the text is meant for.
+        </p>
+      </div>
       <section>
         <form class="" onsubmit="return Client.handleSubmit(event)">
-          <input id="name" type="text" name="input" value="" />
+          <label>Enter the URL of an article: </label>
+          <input
+            id="url"
+            type="url"
+            name="url"
+            placeholder="https://example.com"
+            pattern="https://.*"
+            size="30"
+            required
+          />
           <input
             type="submit"
             id="button"
@@ -37,17 +54,35 @@
       </section>
       <section>
         <strong>Form Results:</strong>
-        <div id="results"></div>
-        <div id="sentiment"></div>
+        <div>
+          Text snippet:
+          <p id="results"></p>
+        </div>
+        <div>
+          Sentiment:
+          <p id="sentiment"></p>
+        </div>
+        <div>
+          Polarity:
+          <p id="polarity"></p>
+        </div>
+        <div>
+          Confidence:
+          <p id="confidence"></p>
+        </div>
+        <div>
+          Ironic or not ironic:
+          <p id="irony"></p>
+        </div>
       </section>
     </main>
     <footer>
       <p>This is a footer</p>
     </footer>
     <script>
-      // // Check that service workers are supported
+      // Check that service workers are supported
       // if ("serviceWorker" in navigator) {
-      //   // Use the window load event to keep the page load performant
+      //   Use the window load event to keep the page load performant
       //   window.addEventListener("load", () => {
       //     navigator.serviceWorker.register("/service-worker.js");
       //   });
