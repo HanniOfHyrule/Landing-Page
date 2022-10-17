@@ -23,7 +23,6 @@ console.log(__dirname);
 
 app.post("/sentiment", async function (req, res) {
   const sentimentResponse = await analyseSentiment(req.body.text);
-  console.log(sentimentResponse);
   res.json(sentimentResponse);
 });
 
@@ -36,11 +35,14 @@ app.listen(8080, function () {
   console.log("Example app listening on port 8080!");
 });
 
-async function analyseSentiment(text) {
+async function analyseSentiment(url) {
   try {
+    const responseURL = await fetch(url);
+    const bodyURL = await responseURL.text();
+
     const formdata = new URLSearchParams();
     formdata.append("key", `${apiKey}`);
-    formdata.append("txt", text);
+    formdata.append("txt", bodyURL);
     formdata.append("lang", "auto");
 
     const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", {
@@ -49,6 +51,7 @@ async function analyseSentiment(text) {
       redirect: "follow",
     });
     const body = await response.json();
+
     return body;
   } catch (error) {
     console.error(error);
