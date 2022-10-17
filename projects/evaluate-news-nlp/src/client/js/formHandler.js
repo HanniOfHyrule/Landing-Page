@@ -1,13 +1,9 @@
-import { checkForURL } from "./urlChecker";
-
 function handleSubmit(event) {
   event.preventDefault();
-  // check what text was put into the form field
+
   let formText = document.getElementById("url").value;
 
   if (Client.checkForURL(formText)) {
-    console.log(formText);
-
     fetch("/sentiment", {
       method: "POST",
       body: JSON.stringify({ text: formText }),
