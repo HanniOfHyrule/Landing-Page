@@ -1,9 +1,12 @@
 function checkForURL(inputURL) {
-  let valid =
-    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(
-      inputURL
-    );
-  return valid;
+  const regex = inputURL.match(
+    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+  );
+
+  if (regex == null) {
+    return 0;
+  }
+  return 1;
 }
 
 export { checkForURL };
