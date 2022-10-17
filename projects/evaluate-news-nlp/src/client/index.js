@@ -1,9 +1,10 @@
-import { checkForName } from "./js/nameChecker";
+import { checkForURL } from "./js/urlChecker";
 import { handleSubmit } from "./js/formHandler";
 import "./styles/resets.scss";
 import "./styles/base.scss";
 import "./styles/footer.scss";
 import "./styles/form.scss";
 import "./styles/header.scss";
+import "./styles/main.scss";
 
-export { checkForName, handleSubmit };
+export { checkForURL, handleSubmit };
