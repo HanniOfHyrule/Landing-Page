@@ -1,6 +1,17 @@
-function updateUiWithSentiment(sentiment) {
-  console.log(sentiment);
+import { isValidURL } from "./urlChecker";
 
+function runSentimentAnalysis(event) {
+  event.preventDefault();
+
+  handleSubmit(document)
+    .then((url) => postContent(url))
+    .then((sentiment) => updateUiWithSentiment(sentiment, document))
+    .catch((reason) => alert(reason));
+
+  return false;
+}
+
+function updateUiWithSentiment(sentiment, document) {
   document.getElementById("results").innerHTML = JSON.stringify(
     sentiment.agreement
   );
@@ -16,28 +27,35 @@ function updateUiWithSentiment(sentiment) {
   document.getElementById("irony").innerHTML = JSON.stringify(sentiment.irony);
 }
 
-function handleSubmit(event) {
-  window.event.preventDefault();
-  let url = document.getElementById("url").value;
+async function handleSubmit(document) {
+  return new Promise((resolve) => {
+    const url = document.getElementById("url").value;
 
-  postContent(url);
+    resolve(url);
+  });
 }
 
-function postContent(url, callback) {
-  if (Client.isValidURL(url)) {
-    fetch("/sentiment", {
-      method: "POST",
-      body: JSON.stringify({ text: url }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(async function (res) {
-      const sentiment = await res.json();
-      callback ? callback(sentiment) : updateUiWithSentiment(sentiment);
-    });
-  } else {
-    alert("please enter a vaild URL!");
-  }
+async function postContent(url) {
+  return new Promise((resolve, reject) => {
+    if (isValidURL(url)) {
+      fetch("/sentiment", {
+        method: "POST",
+        body: JSON.stringify({ text: url }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(async function (res) {
+        resolve(await res.json());
+      });
+    } else {
+      reject("Please enter a vaild URL!");
+    }
+  });
 }
 
-export { handleSubmit, updateUiWithSentiment };
+export {
+  runSentimentAnalysis,
+  handleSubmit,
+  postContent,
+  updateUiWithSentiment,
+};
