@@ -32,7 +32,7 @@
         </p>
       </div>
       <section>
-        <form class="" onsubmit="return Client.handleSubmit(event)">
+        <form class="" onsubmit="return Client.runSentimentAnalysis(event)">
           <label>Enter the URL of an article: </label>
           <input
             id="url"
@@ -47,8 +47,8 @@
             type="submit"
             id="button"
             value="submit"
-            onclick="return Client.handleSubmit(event)"
-            onsubmit="return Client.handleSubmit(event)"
+            onclick="return Client.runSentimentAnalysis(event)"
+            onsubmit="return Client.runSentimentAnalysis(event)"
           />
         </form>
       </section>
@@ -82,7 +82,7 @@
     <script>
       // Check that service workers are supported
       if ("serviceWorker" in navigator) {
-        // Use the window load event to keep the page load performant
+        //   Use the window load event to keep the page load performant
         window.addEventListener("load", () => {
           navigator.serviceWorker.register("/service-worker.js");
         });
