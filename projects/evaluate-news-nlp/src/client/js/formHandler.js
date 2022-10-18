@@ -1,16 +1,43 @@
-function handleSubmit(event) {
-    event.preventDefault()
+function updateUiWithSentiment(sentiment) {
+  console.log(sentiment);
 
-    // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    checkForName(formText)
-
-    console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/test')
-    .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
-    })
+  document.getElementById("results").innerHTML = JSON.stringify(
+    sentiment.agreement
+  );
+  document.getElementById("sentiment").innerHTML = JSON.stringify(
+    sentiment.subjectivity
+  );
+  document.getElementById("polarity").innerHTML = JSON.stringify(
+    sentiment.score_tag
+  );
+  document.getElementById("confidence").innerHTML = JSON.stringify(
+    sentiment.confidence
+  );
+  document.getElementById("irony").innerHTML = JSON.stringify(sentiment.irony);
 }
 
-export { handleSubmit }
+function handleSubmit(event) {
+  window.event.preventDefault();
+  let url = document.getElementById("url").value;
+
+  postContent(url);
+}
+
+function postContent(url, callback) {
+  if (Client.isValidURL(url)) {
+    fetch("/sentiment", {
+      method: "POST",
+      body: JSON.stringify({ text: url }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(async function (res) {
+      const sentiment = await res.json();
+      callback ? callback(sentiment) : updateUiWithSentiment(sentiment);
+    });
+  } else {
+    alert("please enter a vaild URL!");
+  }
+}
+
+export { handleSubmit, updateUiWithSentiment };
