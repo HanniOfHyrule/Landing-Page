@@ -25,6 +25,9 @@ function updateUiWithSentiment(sentiment, document) {
     sentiment.confidence
   );
   document.getElementById("irony").innerHTML = JSON.stringify(sentiment.irony);
+  document
+    .getElementById("results", "sentiment", "polarity", "confidence", "irony")
+    .replaceChildren("results", "sentiment", "polarity", "confidence", "irony");
 }
 
 async function handleSubmit(document) {
