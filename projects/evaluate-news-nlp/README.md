@@ -69,3 +69,7 @@ after that you can start it
 `npm start`
 
 Open your browser at http://localhost:8080
+
+## And this is what it looks like:
+
+![image](/src/client/assets/images/Article_analysis_with_NLP.png)
